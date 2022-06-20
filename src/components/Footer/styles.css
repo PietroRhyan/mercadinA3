@@ -1,0 +1,43 @@
+.footer {
+  width: 100%;
+  height: 40vh;
+
+  gap: 3rem;
+  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #FFF;
+}
+
+.footer .titleLogo {
+  font-size: 1.8rem;
+  font-weight: 400;
+  cursor: pointer;
+}
+
+.footer .titleLogo span {
+  color: #00BFFF;
+}
+
+.footer ul {
+  display: flex;
+
+  gap: 2rem;
+
+  align-content: center;
+  justify-content: space-between;
+}
+
+.footer ul li {
+  list-style: none;
+
+  display: flex;
+  gap: 0.25rem;
+}
+
+.footer .icon {
+  display: inline-block;
+  vertical-align: middle;
+}

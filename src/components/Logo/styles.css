@@ -1,0 +1,9 @@
+.titleLogo {
+  font-size: 1.8rem;
+  font-weight: 400;
+  cursor: pointer;
+}
+
+.titleLogo span {
+  color: #32CD32;
+}
