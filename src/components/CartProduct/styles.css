@@ -1,0 +1,95 @@
+.cartProduct {
+  width: 100%;
+  height: 25vh;
+
+  margin-bottom: 1rem;
+  padding: 1rem;
+
+  background: #FFF;
+  border-radius: 0.5rem;
+
+  display: flex;
+  align-items: center;
+
+  gap: 2rem;
+}
+
+.cartProduct .info {
+  width: 80%;
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  gap: 2rem;
+}
+
+.info .cartProductImage {
+  height: 100%;
+  width: 20%;
+}
+
+.info .cartProductImage img {
+  width: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.cartProduct .cartProductInfo {
+  display: flex;
+  flex-direction: column;
+
+  gap: 0.3rem;
+}
+
+.cartProductInfo h3 {
+  font-size: 1.5rem;
+  font-weight: 400;
+}
+
+.cartProductInfo small {
+  font-weight: 300;
+}
+
+.cartProductInfo i {
+  cursor: pointer;
+  color: red;
+}
+
+.cartProduct .subInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  
+  gap: .5rem;
+}
+
+.subInfo .counter {
+  width: 100%;
+  padding: 0.5rem 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 0.5rem;
+
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  border-radius: 0.5rem;
+
+  background: rgb(242, 242, 242);
+}
+
+.counter .counterButton {
+  cursor: pointer;
+}
+
+.counter .counterButton.disabled {
+  color: #A0A0A0;
+}
+
+.subInfo .amount {
+  color: #A0A0A0;
+}

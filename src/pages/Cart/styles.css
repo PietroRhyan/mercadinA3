@@ -1,0 +1,71 @@
+.content {
+  width: 100%;
+
+  margin: 2rem 0;
+
+  display: grid;
+  grid-template-columns: 2.5fr 0.75fr;
+
+  gap: 1rem;
+}
+
+.payment {
+  max-height: 320px;
+  border-radius: 0.5rem;
+
+  background: #FFF;
+
+  padding: 1rem;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 1rem;
+}
+
+.pricing h3 {
+  font-size: 1.5rem;
+  font-weight: 400;
+}
+
+.payment .pricing {
+  display: flex;
+  flex-direction: column;
+
+  gap: 1rem;
+}
+
+.pricing .unitValue {
+  text-align: end;
+  color: #A0A0A0;
+}
+
+.pricing .totalValue {
+  font-size: 1.8rem;
+  font-weight: 400;
+
+  text-align: end;
+  color: #32CD32;
+}
+
+.payment hr {
+  height: 1px;
+  background: rgba(0, 0, 0, 0.1);
+  border: none;
+}
+
+.payment button {
+  border: none;
+  border-radius: 0.75rem;
+  padding: .75rem 1.5rem;
+  color: #FFF;
+  background: #32CD32;
+
+  font-size: 1.25rem;
+
+  transition: 200ms;
+}
+
+.payment button:hover {
+  filter: brightness(0.8);
+}

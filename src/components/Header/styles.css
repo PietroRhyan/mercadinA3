@@ -2,8 +2,6 @@
   width: 100%;
   padding: 1.5rem 5rem;
 
-  z-index: 1;
-
   background: #FFF;
 
   position: fixed;
@@ -53,5 +51,11 @@
   gap: 1rem;
 
   position: relative;
+
+  transition: 200ms;
+}
+
+.cartBtn:hover {
+  filter: brightness(0.8);
 }
 

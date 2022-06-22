@@ -11,16 +11,6 @@
   background: #FFF;
 }
 
-.footer .titleLogo {
-  font-size: 1.8rem;
-  font-weight: 400;
-  cursor: pointer;
-}
-
-.footer .titleLogo span {
-  color: #00BFFF;
-}
-
 .footer ul {
   display: flex;
 

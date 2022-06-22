@@ -17,7 +17,7 @@ export function Product({ name, value, provider, image }) {
         <small>{provider}</small>
 
         <div className="cart">
-          <FiShoppingCart size={20} />
+          <FiShoppingCart size={18} />
         </div>
       </div>
     </div>

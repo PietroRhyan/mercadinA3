@@ -12,9 +12,8 @@ export function Header() {
 
       <nav>
         <ul>
-          <Link to='/produtos'><li>Produtos</li></Link>
-          <Link to='/categorias'><li>Categorias</li></Link>
-          <Link to='/fornecedores'><li>Fornecedores</li></Link>
+          <Link to='/cadastro-de-produtos'><li>Produtos</li></Link>
+          <Link to='/cadastro-de-fornecedores'><li>Fornecedores</li></Link>
           <Link to='/carrinho'>
             <button className='cartBtn'>
               <span>Carrinho</span>

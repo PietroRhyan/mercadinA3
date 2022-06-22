@@ -1,0 +1,69 @@
+.modalForm {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.modalForm label {
+  font-size: 1.25rem;
+  font-weight: 400;
+  margin-bottom: 0.5rem;
+}
+
+.modalForm input {
+  border: none;
+  background: rgb(242, 242, 242);
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  margin-bottom: 1.2rem;
+}
+
+.modalForm input:last-child{
+  margin-bottom: 0;
+}
+
+.modalForm input:focus {
+  outline: 2px solid rgba(0, 0, 0, 0.3);
+}
+
+.modalButtonGroup {
+  display: flex;
+
+  align-items: center;
+  justify-content: flex-end;
+
+  margin-top: 0.5rem;
+  gap: 1rem;
+}
+
+.modalButtonGroup button {
+  padding: .5rem 1rem;
+
+  font-size: 1em;
+  font-weight: 400;
+
+  border: none;
+  border-radius: .5rem;
+  color: #F0F0F0;
+  
+  display: flex;
+  gap: .5rem;
+  align-items: center;
+  justify-content: space-around;
+
+  transition: 200ms;
+}
+
+.modalButtonGroup .cancelButton {
+  background: #FF0000;
+}
+
+.modalButtonGroup .confirmButton {
+  background: #3CB371;
+}
+
+.modalButtonGroup button:hover, 
+.modalButtonGroup button:focus {
+  filter: brightness(0.8);
+}
