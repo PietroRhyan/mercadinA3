@@ -1,5 +1,7 @@
 import { Modal } from '../Modal'
 
+import api from '../../services/api'
+
 import './styles.css'
 
 export function ModalEditProviders({ isOpen, setIsOpen }) {  
@@ -11,33 +13,31 @@ export function ModalEditProviders({ isOpen, setIsOpen }) {
     })
   }
 
-  // const handleSubmit = async (event) => {
-  //   const titulo = event.target.titulo.value
-  //   const autor = event.target.autor.value
-  //   const editora = event.target.editora.value
-  //   const linkLivro = event.target.linkLivro.value
-  //   const linkImagem = event.target.linkImagem.value
+  const handleSubmit = async (event) => {
+    const nome = event.target.nome.value
+    const email = event.target.email.value
+    const cnpj = event.target.cnpj.value
+    const telefone = event.target.telefone.value
 
-  //   const idReference = localStorage.getItem('@idReferenceToUpdate')
+    const idReference = localStorage.getItem('@idReferenceToUpdateProvider')
 
-  //   await api.put('/update_livro', {
-  //     "new_titulo": titulo,
-  //     "new_autor": autor,
-  //     "new_editora": editora,
-  //     "new_link": linkLivro,
-  //     "new_linkimagem": linkImagem,
-  //     "id": idReference,
-  //   })
+    await api.put('/update_fornecedor', {
+      nome,
+      email,
+      cnpj,
+      telefone,
+      "id": idReference,
+    })
     
-  //   localStorage.removeItem('@idReferenceToUpdate')
-  //   setIsOpen()
-  // }
+    localStorage.removeItem('@idReferenceToUpdateProvider')
+    setIsOpen()
+  }
 
   return(
     <Modal isOpen={isOpen} setIsOpen={setIsOpen}>
-      <form action="" onSubmit={() => {}} className='modalForm'>
-        <label htmlFor="titulo">Nome</label>
-        <input type='text' id='titulo' maxLength={100} placeholder='Digite um título' required/>
+      <form action="" onSubmit={handleSubmit} className='modalForm'>
+        <label htmlFor="nome">Nome</label>
+        <input type='text' id='nome' maxLength={100} placeholder='Digite um título' required/>
 
         <label htmlFor="email">E-mail</label>
         <input type='email' id='email' maxLength={100} placeholder='Digite um email' required/>

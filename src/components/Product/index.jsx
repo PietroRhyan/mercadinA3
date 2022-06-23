@@ -2,7 +2,7 @@ import { FiShoppingCart } from 'react-icons/fi'
 
 import './styles.css'
 
-export function Product({ name, value, provider, image }) {
+export function Product({ name, value, image }) {
   return (
     <div className="product">
       <div className="productImage">
@@ -14,8 +14,6 @@ export function Product({ name, value, provider, image }) {
       <div className="productInfo">
         <h3>R$ {value}</h3>
         <h4>{name}</h4>
-        <small>{provider}</small>
-
         <div className="cart">
           <FiShoppingCart size={18} />
         </div>

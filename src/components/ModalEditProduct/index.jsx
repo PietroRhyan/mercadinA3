@@ -1,8 +1,26 @@
+import { useEffect, useState } from 'react'
 import { Modal } from '../Modal'
+
+import api from '../../services/api'
 
 import './styles.css'
 
 export function ModalEditProduct({ isOpen, setIsOpen }) {  
+  const [providers, setProviders] = useState([])
+  const [categories, setCategories] = useState([])
+
+  useEffect(() => {
+    async function getInfo() {
+      let response = await api.get('/fornecedor', {})
+      setProviders(response.data)
+
+      response = await api.get('/categoria', {})
+      setCategories(response.data)
+    }
+
+    getInfo()
+  }, [])
+
   function cleanForms() {
     const forms = document.querySelectorAll('input')
 
@@ -11,44 +29,57 @@ export function ModalEditProduct({ isOpen, setIsOpen }) {
     })
   }
 
-  // const handleSubmit = async (event) => {
-  //   const titulo = event.target.titulo.value
-  //   const autor = event.target.autor.value
-  //   const editora = event.target.editora.value
-  //   const linkLivro = event.target.linkLivro.value
-  //   const linkImagem = event.target.linkImagem.value
+  const handleSubmit = async (event) => {
+    const nome = event.target.titulo.value
+    const valor = event.target.valorUnit.value
+    const quantidade = event.target.quantidade.value
+    const id_categoria = event.target.categoria.value
+    const id_fornecedor = event.target.fornecedor.value
+    const link = event.target.linkImagem.value
 
-  //   const idReference = localStorage.getItem('@idReferenceToUpdate')
+    const idReference = localStorage.getItem('@idReferenceToUpdateProduct')
 
-  //   await api.put('/update_livro', {
-  //     "new_titulo": titulo,
-  //     "new_autor": autor,
-  //     "new_editora": editora,
-  //     "new_link": linkLivro,
-  //     "new_linkimagem": linkImagem,
-  //     "id": idReference,
-  //   })
+    await api.put('/update_produto', {
+      nome,
+      valor,
+      quantidade,
+      id_categoria,
+      id_fornecedor,
+      link,
+      "id": idReference,
+    })
     
-  //   localStorage.removeItem('@idReferenceToUpdate')
-  //   setIsOpen()
-  // }
+    localStorage.removeItem('@idReferenceToUpdateProduct')
+    setIsOpen()
+  }
 
   return(
     <Modal isOpen={isOpen} setIsOpen={setIsOpen}>
-      <form action="" onSubmit={() => {}} className='modalForm'>
+      <form action="" onSubmit={handleSubmit} className='modalForm'>
         <label htmlFor="titulo">Título</label>
         <input type='text' id='titulo' maxLength={100} placeholder='Digite um título' required/>
 
-        <label htmlFor="valorUnit">Valor Unit</label>
-        <input type='number' id='valorUnit' maxLength={100} placeholder={12.90} required/>
+        <label htmlFor="valorUnit">Valor Unit.</label>
+        <input type='number' id='valorUnit' placeholder={12.90} required/>
+
+        <label htmlFor="quantidade">Quantidade</label>
+        <input type='number' id='quantidade' placeholder='Digite a quantidade do produto no estoque' required/>
 
         <label htmlFor="categoria">Categoria</label>
-        <input type='text' id='categoria' maxLength={100} placeholder='Digite um nome para a categoria' required/>
+        <select name='categoria' id='categoria'>
+        {categories.map((category) => (
+          <option  key={category.id} value={category.id}>{category.categoria}</option>
+        ))}
+        </select>
 
         <label htmlFor="fornecedor">Fornecedor(a)</label>
-        <input type='text' id='fornecedor' placeholder='Digite o nome do fornecedor(a)' required/>
+        <select name='fornecedor' id='fornecedor' >
+        {providers.map((provider) => (
+          <option key={provider.id} value={provider.id}>{provider.nome}</option>
+        ))}
+        </select>
 
-        <label htmlFor="linlImagem">Link da Imagem</label>
+        <label htmlFor="linkImagem">Link da Imagem</label>
         <input type='text' id='linkImagem' placeholder='Cole aqui o link da imagem' />
 
         <div className='modalButtonGroup'>

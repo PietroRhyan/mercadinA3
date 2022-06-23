@@ -11,7 +11,8 @@
   margin-bottom: 0.5rem;
 }
 
-.modalForm input {
+.modalForm input,
+.modalForm select {
   border: none;
   background: rgb(242, 242, 242);
   padding: 0.5rem 1rem;
@@ -23,7 +24,8 @@
   margin-bottom: 0;
 }
 
-.modalForm input:focus {
+.modalForm input:focus,
+.modalForm select:focus  {
   outline: 2px solid rgba(0, 0, 0, 0.3);
 }
 

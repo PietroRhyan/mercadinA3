@@ -6,11 +6,32 @@ import { Header } from "../../components/Header";
 import { ModalAddProduct } from '../../components/ModalAddProduct';
 import { ModalEditProduct } from '../../components/ModalEditProduct';
 
+import api from '../../services/api'
+
 import './styles.css'
 
 export function ProductsRegistration() {
   const [modalIsOpen, setModalIsOpen] = useState(false)
   const [editModalIsOpen, setEditModalIsOpen] = useState(false)
+  
+  const [products, setProducts] = useState([])
+  
+  useEffect(() => {
+    async function getProducts() {
+      let response = await api.get('/produto')
+      setProducts(response.data)
+    }
+
+    getProducts()
+  }, [])
+
+  async function handleDeleteProducts(id) {
+    await api.delete(`/delete_produto?id=${id}`, {
+    })
+
+    const recountProducts = products.filter(product => product.id !== id)
+    setProducts(recountProducts)
+  }
 
   function handleModalIsOpen() {
     setModalIsOpen(!modalIsOpen)
@@ -20,18 +41,10 @@ export function ProductsRegistration() {
     setEditModalIsOpen(!editModalIsOpen)
   }
 
-  // function sendReferenceId(id) {
-  //   handleEditModalIsOpen()
-  //   localStorage.setItem('@idReferenceToUpdate', id)
-  // }
-
-  // function shortLink(link) {
-  //   let formatLink = link.slice(0, 27)
-  //   formatLink = formatLink.split('')
-  //   formatLink.push('...')
-
-  //   return formatLink
-  // }
+  function sendReferenceId(id) {
+    handleEditModalIsOpen()
+    localStorage.setItem('@idReferenceToUpdateProduct', id)
+  }
 
   return (
     <>
@@ -60,6 +73,7 @@ export function ProductsRegistration() {
                 <th>Foto</th>
                 <th>Título</th>
                 <th>Valor Unit.</th>
+                <th>Qntd.</th>
                 <th>Categoria</th>
                 <th>Fornecedor(a)</th>
                 <th></th>
@@ -67,31 +81,34 @@ export function ProductsRegistration() {
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td className='staticInfo'>Imagem enviada</td>
-                <td>Título</td>
-                <td>R$ 10,00</td>
-                <td>Categoria</td>
-                <td>Fornecedor(a)</td>
-                <td className="edit">
-                  <FiEdit
-                    size={20}
-                    onClick={handleEditModalIsOpen}
-                    style={{
-                      cursor: 'pointer',
-                    }}
-                  />
-                </td>
-                <td className="delete">
-                  <FiTrash
-                    size={20}
-                    onClick={() => {}}
-                    style={{
-                      cursor: 'pointer',
-                    }}
-                  />
-                </td>
-              </tr>
+              { products.map((product) => (
+                <tr key={product.id}>
+                  <td className='staticInfo'>Imagem enviada</td>
+                  <td>{product.nome}</td>
+                  <td>R$ {product.valor}</td>
+                  <td>{product.quantidade}</td>
+                  <td>{product.id_categoria}</td>
+                  <td>{product.id_fornecedor}</td>
+                  <td className="edit">
+                    <FiEdit
+                      size={20}
+                      onClick={() => sendReferenceId(product.id)}
+                      style={{
+                        cursor: 'pointer',
+                      }}
+                    />
+                  </td>
+                  <td className="delete">
+                    <FiTrash
+                      size={20}
+                      onClick={() => handleDeleteProducts(product.id)}
+                      style={{
+                        cursor: 'pointer',
+                      }}
+                    />
+                  </td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>

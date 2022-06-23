@@ -6,11 +6,33 @@ import { Header } from "../../components/Header";
 import { ModalAddProviders } from '../../components/ModalAddProviders';
 import { ModalEditProviders } from '../../components/ModalEditProviders';
 
+import api from '../../services/api';
+
 import './styles.css'
 
 export function ProvidersRegistration() {
   const [modalIsOpen, setModalIsOpen] = useState(false)
   const [editModalIsOpen, setEditModalIsOpen] = useState(false)
+
+  const [providers, setProviders] = useState([])
+  
+  useEffect(() => {
+    async function getProviders() {
+      const response = await api.get('/fornecedor')
+      setProviders(response.data)
+    }
+
+    console.log(providers)
+    getProviders()
+  }, [])
+
+  async function handleDeleteProvider(id) {
+    await api.delete(`/delete_fornecedor?id=${id}`, {
+    })
+
+    const recountProviders = providers.filter(provider => provider.id !== id)
+    setProviders(recountProviders)
+  }
 
   function handleModalIsOpen() {
     setModalIsOpen(!modalIsOpen)
@@ -20,18 +42,10 @@ export function ProvidersRegistration() {
     setEditModalIsOpen(!editModalIsOpen)
   }
 
-  // function sendReferenceId(id) {
-  //   handleEditModalIsOpen()
-  //   localStorage.setItem('@idReferenceToUpdate', id)
-  // }
-
-  // function shortLink(link) {
-  //   let formatLink = link.slice(0, 27)
-  //   formatLink = formatLink.split('')
-  //   formatLink.push('...')
-
-  //   return formatLink
-  // }
+  function sendReferenceId(id) {
+    handleEditModalIsOpen()
+    localStorage.setItem('@idReferenceToUpdateProvider', id)
+  }
 
   return (
     <>
@@ -66,30 +80,32 @@ export function ProvidersRegistration() {
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>Nome</td>
-                <td>email@gmail.com</td>
-                <td>XX.XXX.XXX/0001-XX</td>
-                <td>(XX) XXXXX-XXXX</td>
-                <td className="edit">
-                  <FiEdit
-                    size={20}
-                    onClick={handleEditModalIsOpen}
-                    style={{
-                      cursor: 'pointer',
-                    }}
-                  />
-                </td>
-                <td className="delete">
-                  <FiTrash
-                    size={20}
-                    onClick={() => {}}
-                    style={{
-                      cursor: 'pointer',
-                    }}
-                  />
-                </td>
-              </tr>
+              { providers.map((provider) => (
+                <tr key={provider.id}>
+                  <td>{provider.nome}</td>
+                  <td>{provider.email}</td>
+                  <td>{provider.cnpj}</td>
+                  <td>{provider.telefone}</td>
+                  <td className="edit">
+                    <FiEdit
+                      size={20}
+                      onClick={() => sendReferenceId(provider.id)}
+                      style={{
+                        cursor: 'pointer',
+                      }}
+                    />
+                  </td>
+                  <td className="delete">
+                    <FiTrash
+                      size={20}
+                      onClick={() => handleDeleteProvider(provider.id)}
+                      style={{
+                        cursor: 'pointer',
+                      }}
+                    />
+                  </td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>

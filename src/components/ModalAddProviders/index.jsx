@@ -1,5 +1,7 @@
 import { Modal } from '../Modal'
 
+import api from '../../services/api'
+
 import './styles.css'
 
 export function ModalAddProviders({ isOpen, setIsOpen }) {
@@ -11,29 +13,27 @@ export function ModalAddProviders({ isOpen, setIsOpen }) {
     })
   }
 
-  // const handleSubmit = async (event) => {
-  //   const titulo = event.target.titulo.value
-  //   const autor = event.target.autor.value
-  //   const editora = event.target.editora.value
-  //   const linkLivro = event.target.linkLivro.value
-  //   const linkImagem = event.target.linkImagem.value
+  const handleSubmit = async (event) => {
+    const nome = event.target.nome.value
+    const email = event.target.email.value
+    const cnpj = event.target.cnpj.value
+    const telefone = event.target.telefone.value
 
-  //   await api.post('/cadastro_livros', {
-  //     titulo,
-  //     autor,
-  //     editora,
-  //     "link": linkLivro,
-  //     "linkimagem": linkImagem,
-  //   })
+    await api.post('/cadastro_fornecedor', {
+      nome,
+      email,
+      cnpj,
+      telefone,
+    })
 
-  //   setIsOpen()
-  // }
+    setIsOpen()
+  }
 
   return(
     <Modal isOpen={isOpen} setIsOpen={setIsOpen}>
-      <form action="" onSubmit={() => {}} className='modalForm'>
-        <label htmlFor="titulo">Nome</label>
-        <input type='text' id='titulo' maxLength={100} placeholder='Digite um título' required/>
+      <form action="" onSubmit={handleSubmit} className='modalForm'>
+        <label htmlFor="nome">Nome</label>
+        <input type='text' id='nome' maxLength={100} placeholder='Digite um título' required/>
 
         <label htmlFor="email">E-mail</label>
         <input type='email' id='email' maxLength={100} placeholder='Digite um email' required/>
